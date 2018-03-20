@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Karla Fejfarová</title>
-    <link>https://karlafej.github.io/</link>
-    <description>Recent content on Karla Fejfarová</description>
+    <title>Gridextra on Karla Fejfarová</title>
+    <link>https://karlafej.github.io/tags/gridextra/</link>
+    <description>Recent content in Gridextra on Karla Fejfarová</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <copyright>© This post is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License，please give source if you likes to quote or reproduce.</copyright>
     <lastBuildDate>Mon, 19 Mar 2018 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="https://karlafej.github.io/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://karlafej.github.io/tags/gridextra/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
@@ -21,15 +21,6 @@
       <description>Sometimes I want to see a table inside a plot in R. Let’s say that a colleague comes to me with a question: How come there are phenotyping data for a knockout strain XY even if it’s not viable?
 In this case I want to see a plot of homozygous/heterozygous pups alongside with a table of the viability screen outcomes.
 Thanks to the tableGrob function from the gridExtra package, this is quite easy.</description>
-    </item>
-    
-    <item>
-      <title>About</title>
-      <link>https://karlafej.github.io/about/</link>
-      <pubDate>Thu, 05 May 2016 21:48:51 -0700</pubDate>
-      
-      <guid>https://karlafej.github.io/about/</guid>
-      <description>This is a &amp;ldquo;hello world&amp;rdquo; example website for the blogdown package. The theme was forked from @jrutheiser/hugo-lithium-theme and modified by Yihui Xie.</description>
     </item>
     
   </channel>

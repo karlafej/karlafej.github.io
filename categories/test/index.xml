@@ -2,22 +2,22 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Test on Karla Fejfarová</title>
-    <link>/categories/test/</link>
+    <link>https://karlafej.github.io/categories/test/</link>
     <description>Recent content in Test on Karla Fejfarová</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <copyright>© This post is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License，please give source if you likes to quote or reproduce.</copyright>
     <lastBuildDate>Thu, 22 Feb 2018 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="/categories/test/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://karlafej.github.io/categories/test/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Hello world</title>
-      <link>/post/hello-world/</link>
+      <link>https://karlafej.github.io/post/hello-world/</link>
       <pubDate>Thu, 22 Feb 2018 00:00:00 +0000</pubDate>
       
-      <guid>/post/hello-world/</guid>
+      <guid>https://karlafej.github.io/post/hello-world/</guid>
       <description>Test test test :-)</description>
     </item>
     

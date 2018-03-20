@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+  <meta charset="utf-8" />
+
+  
+  <title>Adding tables into ggplot plots</title>
+
+  
+  
+
+
+
+
+
+  
+  <meta name="author" content="karla" />
+  <meta name="description" content="Sometimes I want to see a table inside a plot in R. Let’s say that a colleague comes to me with a question: How come there are phenotyping data for a knockout strain XY even if it’s not viable?
+In this case I want to see a plot of homozygous/heterozygous pups alongside with a table of the viability screen outcomes.
+Thanks to the tableGrob function from the gridExtra package, this is quite easy." />
+
+  
+  
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:site" content="@karlafej" />
+    <meta name="twitter:title" content="Adding tables into ggplot plots" />
+    <meta name="twitter:description" content="Sometimes I want to see a table inside a plot in R. Let’s say that a colleague comes to me with a question: How come there are phenotyping data for a knockout strain XY even if it’s not viable?
+In this case I want to see a plot of homozygous/heterozygous pups alongside with a table of the viability screen outcomes.
+Thanks to the tableGrob function from the gridExtra package, this is quite easy." />
+    <meta name="twitter:image" content="https://karlafej.github.io/img/avatar.jpg" />
+  
+
+  
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="Adding tables into ggplot plots" />
+  <meta property="og:description" content="Sometimes I want to see a table inside a plot in R. Let’s say that a colleague comes to me with a question: How come there are phenotyping data for a knockout strain XY even if it’s not viable?
+In this case I want to see a plot of homozygous/heterozygous pups alongside with a table of the viability screen outcomes.
+Thanks to the tableGrob function from the gridExtra package, this is quite easy." />
+  <meta property="og:url" content="https://karlafej.github.io/post/adding-tables-into-ggplot-plots/" />
+  <meta property="og:image" content="https://karlafej.github.io/img/avatar.jpg" />
+
+
+
+
+<meta name="generator" content="Hugo 0.35" />
+
+
+<link rel="canonical" href="https://karlafej.github.io/post/adding-tables-into-ggplot-plots/" />
+<link rel="alternative" href="https://karlafej.github.io/index.xml" title="Karla Fejfarová" type="application/atom+xml" />
+
+
+<meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<meta name="format-detection" content="telephone=no,email=no,adress=no" />
+<meta http-equiv="Cache-Control" content="no-transform" />
+
+
+<meta name="robots" content="index,follow" />
+<meta name="referrer" content="origin-when-cross-origin" />
+
+
+
+
+
+
+
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+<meta name="apple-mobile-web-app-title" content="Karla Fejfarová" />
+<meta name="msapplication-tooltip" content="Karla Fejfarová" />
+<meta name='msapplication-navbutton-color' content="#5fbf5e" />
+<meta name="msapplication-TileColor" content="#5fbf5e" />
+<meta name="msapplication-TileImage" content="/img/tile-image-windows.png" />
+<link rel="icon" href="https://karlafej.github.io/img/favicon.ico" />
+<link rel="icon" type="image/png" sizes="16x16" href="https://karlafej.github.io/img/favicon-16x16.png" />
+<link rel="icon" type="image/png" sizes="32x32" href="https://karlafej.github.io/img/favicon-32x32.png" />
+<link rel="icon" sizes="192x192" href="https://karlafej.github.io/img/touch-icon-android.png" />
+<link rel="apple-touch-icon" href="https://karlafej.github.io/img/touch-icon-apple.png" />
+<link rel="mask-icon" href="https://karlafej.github.io/img/safari-pinned-tab.svg" color="#5fbf5e" />
+
+
+
+<link rel="stylesheet" href="//cdn.bootcss.com/video.js/6.2.8/alt/video-js-cdn.min.css" />
+
+<link rel="stylesheet" href="https://karlafej.github.io/css/bundle.css" />
+
+
+  
+  <!--[if lt IE 9]>
+    <script src="//cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="//cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <script src="//cdn.bootcss.com/video.js/6.2.8/ie8/videojs-ie8.min.js"></script>
+  <![endif]-->
+
+<!--[if lte IE 11]>
+    <script src="//cdn.bootcss.com/classlist/1.1.20170427/classList.min.js"></script>
+  <![endif]-->
+
+
+<script src="//cdn.bootcss.com/object-fit-images/3.2.3/ofi.min.js"></script>
+
+
+<script src="//cdn.bootcss.com/smooth-scroll/12.1.4/js/smooth-scroll.polyfills.min.js"></script>
+
+
+</head>
+  <body>
+    
+    <div class="suspension">
+      <a title="Go to top" class="to-top is-hide"><span class="icon icon-up"></span></a>
+      
+        
+      
+    </div>
+    
+    
+  <header class="site-header">
+  <img class="avatar" src="https://karlafej.github.io/img/avatar.jpg" alt="Avatar">
+  
+  <h2 class="title">Karla Fejfarová</h2>
+  
+  <p class="subtitle">~ Export random ~</p>
+  <button class="menu-toggle" type="button">
+    <span class="icon icon-menu"></span>
+  </button>
+  <nav class="site-menu collapsed">
+    <h2 class="offscreen">Main Menu</h2>
+    <ul class="menu-list">
+      
+      
+      
+      
+        <li class="menu-item
+            
+            
+            
+              is-active
+            ">
+            <a href="https://karlafej.github.io/">Home</a>
+          </li>
+      
+        <li class="menu-item
+            
+            
+            ">
+            <a href="https://karlafej.github.io/tags/">Tags</a>
+          </li>
+      
+    </ul>
+  </nav>
+  <nav class="social-menu collapsed">
+    <h2 class="offscreen">Social Networks</h2>
+    <ul class="social-list">
+
+      
+
+      
+      <li class="social-item">
+        <a href="//github.com/karlafej" title="GitHub"><span class="icon icon-github"></span></a>
+      </li>
+
+      <li class="social-item">
+        <a href="//twitter.com/karlafej" title="Twitter"><span class="icon icon-twitter"></span></a>
+      </li>
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <li class="social-item">
+        <a href="https://karlafej.github.io/index.xml"><span class="icon icon-rss" title="RSS"></span></a>
+      </li>
+
+    </ul>
+  </nav>
+</header>
+
+  <section class="main post-detail">
+    <header class="post-header">
+      <h1 class="post-title">Adding tables into ggplot plots</h1>
+      <p class="post-meta">@karla · Mar 19, 2018 · 2 min read</p>
+    </header>
+    <article class="post-content"><p>Sometimes I want to see a table inside a plot in R. Let’s say that a colleague comes to me with a question: How come there are phenotyping data for a knockout strain XY even if it’s not viable?</p>
+<p>In this case I want to see a plot of homozygous/heterozygous pups alongside with a table of the viability screen outcomes.</p>
+<p>Thanks to the <code>tableGrob</code> function from the <a href="https://cran.r-project.org/web/packages/gridExtra/vignettes/tableGrob.html">gridExtra</a> package, this is quite easy.</p>
+<p>First, we need to filter and select the data and make the plot.</p>
+<pre class="r"><code>library(tidyverse)
+library(gridExtra)
+
+# viability screen outcomes (for the table)
+categ &lt;- read_csv(&#39;./data/frantisek/categorical_2018-01-19_all.csv&#39;)
+via &lt;- categ %&gt;% 
+  filter(parameter_stable_id == &quot;IMPC_VIA_001_001&quot;) %&gt;% 
+  filter(gene_symbol == &#39;Dbn1&#39;) %&gt;% 
+  select(c(&quot;phenotyping_center&quot;, &quot;category&quot;)) %&gt;% 
+  arrange(phenotyping_center) %&gt;% 
+  rename(Outcome = category) %&gt;% 
+  rename(`Phenotyping center` = phenotyping_center) 
+
+# number of homozygous/heterozygous/wt pups (for plotting)
+unidim &lt;- read_csv(&quot;./data/frantisek/unidimensional_2018-01-19_all.csv&quot;)
+pups &lt;- unidim %&gt;% 
+  filter(procedure_stable_id == &quot;IMPC_VIA_001&quot;) %&gt;% 
+  filter(gene_symbol == &#39;Dbn1&#39;) 
+
+cbPalette &lt;- c(&quot;#00BA38&quot;, &quot;#619CFF&quot;, &quot;#F8766D&quot;)
+
+plt &lt;- 
+pups %&gt;% 
+  filter(grepl(&quot;^Total pups &quot;, pups$parameter_name)) %&gt;% 
+  ggplot(aes(x = phenotyping_center, y = data_point, 
+             fill = parameter_name)) +
+  geom_bar(stat=&quot;identity&quot;) +
+  scale_fill_manual(values=cbPalette) +
+  scale_y_continuous(breaks=seq(0,400,25)) +
+  theme_bw() +
+  labs(x = &quot;Phenotyping center&quot;, y = &quot;Number of pups&quot;) +
+  theme(legend.title = element_blank(),
+        legend.text = element_text(size = 6),
+        legend.position = &quot;bottom&quot;,
+        axis.text = element_text(size = 6, face = &quot;bold&quot;),
+        axis.title = element_text(size = 8)) +
+  ggtitle(&quot;Dbn1 viability&quot;) </code></pre>
+<p>Now, <code>gridExtra::tableGrob</code> creates a table-like plot of a data frame and <code>annotation_custom()</code> arranges it within the plot area.</p>
+<pre class="r"><code>plt + 
+   annotation_custom(tableGrob(via, rows=NULL, 
+                    theme = ttheme_default(base_size = 5,
+                                           padding = unit(c(2, 1), &quot;mm&quot;))), 
+                    ymin = 175, xmin = 4)</code></pre>
+<p><img src="https://karlafej.github.io/post/2018-03-19-adding-tables-into-ggplot-plots_files/figure-html/plot-1.png" width="480" /></p>
+<p>What if I want the table besides the plot? The <code>grid.arrange</code> function from the <code>gridExtra</code> package will do the trick.</p>
+<pre class="r"><code>via_table &lt;- tableGrob(via, rows=NULL, 
+                       theme = ttheme_default(base_size = 6))
+grid.arrange(plt, via_table, ncol=2, widths = c(2,1))</code></pre>
+<p><img src="https://karlafej.github.io/post/2018-03-19-adding-tables-into-ggplot-plots_files/figure-html/plot2-1.png" width="672" /></p>
+<p>That’s it! From this picture, we can see that one of the phenotyping centres find the knockout mice viable and they are able to produce enough homozygous mice. Don’t ask me why.</p>
+<p>(All data shown here are publicly available at <a href="https://www.mousephenotype.org/data/documentation/data-access">IMPC data portal</a>.)</p>
+</article>
+    <footer class="post-footer">
+      
+      <ul class="post-tags">
+        
+          <li><a href="https://karlafej.github.io/tags/rstats"><span class="tag">Rstats</span></a></li>
+        
+          <li><a href="https://karlafej.github.io/tags/gridextra"><span class="tag">GridExtra</span></a></li>
+        
+          <li><a href="https://karlafej.github.io/tags/dataviz"><span class="tag">Dataviz</span></a></li>
+        
+          <li><a href="https://karlafej.github.io/tags/ggplot"><span class="tag">Ggplot</span></a></li>
+        
+      </ul>
+      
+      <p class="post-copyright">
+        © This post is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License，please give source if you likes to quote or reproduce.
+      </p>
+    </footer>
+    
+      
+    
+  </section>
+  <footer class="site-footer">
+  <p>© 2017-2018 Karla Fejfarová</p>
+  <p>Powered by <a href="https://gohugo.io/" target="_blank">Hugo</a> with theme <a href="https://github.com/laozhu/hugo-nuo" target="_blank">Nuo</a>.</p>
+  
+</footer>
+
+
+
+<script async src="//cdn.bootcss.com/video.js/6.2.8/alt/video.novtt.min.js"></script>
+<script async src="//cdn.bootcss.com/mathjax/2.7.2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [['$','$'], ['\\(','\\)']],
+      displayMath: [['$$','$$'], ['\[','\]']],
+      processEscapes: true,
+      processEnvironments: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+      TeX: { equationNumbers: { autoNumber: "AMS" },
+      extensions: ["AMSmath.js", "AMSsymbols.js"] }
+    }
+  });
+</script>
+<script type="text/x-mathjax-config">
+  // Fix <code> tags after MathJax finishes running. This is a
+  // hack to overcome a shortcoming of Markdown. Discussion at
+  // https://github.com/mojombo/jekyll/issues/199
+  MathJax.Hub.Queue(() => {
+    MathJax.Hub.getAllJax().map(v => v.SourceElement().parentNode.className += ' has-jax');
+  });
+</script>
+
+<script src="https://karlafej.github.io/js/bundle.js"></script>
+
+
+
+
+  </body>
+</html>
